@@ -11,12 +11,14 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^9.4.0",
     "koa2-cors": "^2.0.6",
+    "minimist": "^1.2.5",
     "path": "^0.12.7",
     "progress": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "node src/app"
+    "dev": "node src/app",
+    "build": "node src/app --build"
   },
   "repository": {
     "type": "git",
