@@ -1,0 +1,28 @@
+{
+  "name": "node-file",
+  "version": "1.0.0",
+  "description": "node文件操作",
+  "main": "app.js",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.4.0",
+    "path": "^0.12.7",
+    "progress": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "node src/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TwinkleDing/node-file.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TwinkleDing/node-file/issues"
+  },
+  "homepage": "https://github.com/TwinkleDing/node-file#readme"
+}
