@@ -8,7 +8,8 @@ router.get('/', (ctx, next) => {
   ctx.body = fs.getDir('file')
 })
 .get('/info', (ctx, next) => {
-  ctx.body = fs.statFile('file/first.js')
+  let content = fs.readFile('file/first.js', 'sync')
+  ctx.body = content;
 });
 
 module.exports = router;

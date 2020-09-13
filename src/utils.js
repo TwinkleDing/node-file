@@ -50,22 +50,35 @@ const openFile = (fileName, flags) => {
 }
 
 // 读取文件
-const readFile = (fileName) => {
-  return new Promise ((resolve, reject) => {
-    fs.readFile(fileName, (err, data) => {
+const readFile = (fileName, sync) => {
+  if (sync) {
+    return fs.readFileSync(fileName, 'utf8');
+  } else {
+    fs.readFile(fileName, 'utf8', (err, data) => {
       if(err) {
         console.error(err);
-        reject(err);
+        return err;
       }else {
-        resolve(data);
+        return err;
       }
     });
-  })
+  }
 }
 
 // 文件属性
-const statFile = fileName => {
-  return fs.statSync(fileName);
+const statFile = (fileName, sync) => {
+  if (sync) {
+    return fs.statSync(fileName);
+  } else {
+    fs.stat(fileName, (err, data) => {
+      if(err) {
+        console.error(err);
+        return err;
+      }else {
+        return err;
+      }
+    });
+  }
 }
 
 // 获取文件夹内容
