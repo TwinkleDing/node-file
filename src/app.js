@@ -1,21 +1,20 @@
 const http = require('http');
 const chalk = require('chalk');
+const logger = require('koa-logger');
 const Koa = require('koa');
-const app = new Koa();
-const router = require('koa-router')();
 const bodyparser = require('koa-bodyparser');
+const cors = require('koa2-cors');
+const json = require('koa-json');
+const router = require('./router');
 
+const app = new Koa();
+app.use(cors())
+app.use(json())
+app.use(logger())
+app.use(router.routes());
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']
 }))
-
-router.get('/', (ctx, next) => {
-  ctx.body = 'Hello World';
-})
-app.use(router.routes());
-
-const server = http.createServer(app.callback());
-
 app.use(async (ctx, next) => {
   const start = new Date();
   await next();
@@ -24,6 +23,7 @@ app.use(async (ctx, next) => {
 })
 
 const port = '3333';
+const server = http.createServer(app.callback());
 server.listen(port, () => {
   console.log(`server start: ${chalk.green(`http://localhost:${port}/`)}`)
 })

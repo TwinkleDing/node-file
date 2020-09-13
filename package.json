@@ -7,7 +7,10 @@
     "chalk": "^4.1.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
     "koa-router": "^9.4.0",
+    "koa2-cors": "^2.0.6",
     "path": "^0.12.7",
     "progress": "^2.0.3"
   },
