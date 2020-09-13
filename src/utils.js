@@ -64,20 +64,14 @@ const readFile = (fileName) => {
 }
 
 // 文件属性
-const statFile = (fileName, sync) => {
-  if (sync) {
-    return fs.statSync(fileName)
-  } else {
-    fs.stat(fileName, (err, data) => {
-      return data
-    });
-  }
+const statFile = fileName => {
+  return fs.statSync(fileName);
 }
 
 // 获取文件夹内容
 const getDir = (dirName) => {
   let res = fs.readdirSync(dirName).map(fileName => {
-    let file = statFile(path.join(dirName, fileName), 'true');
+    let file = statFile(path.join(dirName, fileName));
     return {
       name: fileName,
       type: file.isFile() ? 'file' : 'folder'

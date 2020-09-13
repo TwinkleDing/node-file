@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "node文件操作",
   "main": "app.js",
+  "scripts": {
+    "dev": "node src/app",
+    "build": "node src/app --build"
+  },
   "dependencies": {
     "chalk": "^4.1.0",
     "koa": "^2.13.0",
@@ -16,10 +20,6 @@
     "progress": "^2.0.3"
   },
   "devDependencies": {},
-  "scripts": {
-    "dev": "node src/app",
-    "build": "node src/app --build"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TwinkleDing/node-file.git"
