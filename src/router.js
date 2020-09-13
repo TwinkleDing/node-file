@@ -5,12 +5,11 @@ router.get('/', (ctx, next) => {
   ctx.body = 'Hello World';
 })
 .get('/list', (ctx, next) => {
-  fs.getDir('file').then(res => {
-    ctx.body =  res
-  })
+  ctx.body =fs.getDir('file')
+  
 })
 .get('/info', (ctx, next) => {
-  
+  ctx.body = fs.statFile('file/first.js')
 })
 
 module.exports = router;

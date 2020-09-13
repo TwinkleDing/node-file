@@ -68,31 +68,22 @@ const statFile = (fileName, sync) => {
   if (sync) {
     return fs.statSync(fileName)
   } else {
-    return new Promise ((resolve, reject) => {
-      fs.stat(fileName, (err, data) => {
-        if(err) {
-          console.error(err);
-          reject(err);
-        }else {
-          resolve(data);
-        }
-      });
-    })
+    fs.stat(fileName, (err, data) => {
+      return data
+    });
   }
 }
 
 // 获取文件夹内容
 const getDir = (dirName) => {
-  return new Promise ((resolve, reject) => {
-    let res = fs.readdirSync(dirName).map(fileName => {
-      let file = statFile(path.join(dirName, fileName), 'true');
-      return {
-        name: fileName,
-        type: file.isFile() ? 'file' : 'folder'
-      }
-    })
-    resolve(res);
+  let res = fs.readdirSync(dirName).map(fileName => {
+    let file = statFile(path.join(dirName, fileName), 'true');
+    return {
+      name: fileName,
+      type: file.isFile() ? 'file' : 'folder'
+    }
   })
+  return res;
 }
 module.exports = {
   writeFile,
