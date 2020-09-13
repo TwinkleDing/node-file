@@ -1,7 +1,8 @@
-const fs = require("fs")
+const fs = require("fs");
+const path = require('path');
 // 文件名的地址相对于启动node的地址
 // 写入文件
-exports.writeFile = (fileName, data) => {
+const writeFile = (fileName, data) => {
   return new Promise((reslove, reject) => {
     fs.writeFile(fileName, data,  err => {
       if(err) {
@@ -15,7 +16,7 @@ exports.writeFile = (fileName, data) => {
 }
 
 // 追加文件内容
-exports.appendFile = (fileName, data) => {
+const appendFile = (fileName, data) => {
   return new Promise((reslove, reject) => {
     fs.appendFile(fileName, data,  err => {
       if(err) {
@@ -34,7 +35,7 @@ exports.appendFile = (fileName, data) => {
   w:写入，不在则创建，wx:写入，存在失败，w+:读写，不存在则创建，wx+:写入，存在失败
   a:追加打开，不存在创建，ax:存在失败，a+:读取追加，ax+:存在失败
 */
-exports.openFile = (fileName, flags) => {
+const openFile = (fileName, flags) => {
   return new Promise((resolve, reject) => {
     fs.open(fileName, flags, function(err, fd) {
       if(err) {
@@ -49,7 +50,7 @@ exports.openFile = (fileName, flags) => {
 }
 
 // 读取文件
-exports.readFile =(fileName) => {
+const readFile = (fileName) => {
   return new Promise ((resolve, reject) => {
     fs.readFile(fileName, (err, data) => {
       if(err) {
@@ -63,16 +64,41 @@ exports.readFile =(fileName) => {
 }
 
 // 文件属性
-exports.statFile =(fileName) => {
-  return new Promise ((resolve, reject) => {
-    fs.stat(fileName, (err, data) => {
-      if(err) {
-        console.error(err);
-        reject(err);
-      }else {
-        resolve(data);
-      }
-    });
-  })
+const statFile = (fileName, sync) => {
+  if (sync) {
+    return fs.statSync(fileName)
+  } else {
+    return new Promise ((resolve, reject) => {
+      fs.stat(fileName, (err, data) => {
+        if(err) {
+          console.error(err);
+          reject(err);
+        }else {
+          resolve(data);
+        }
+      });
+    })
+  }
 }
 
+// 获取文件夹内容
+const getDir = (dirName) => {
+  return new Promise ((resolve, reject) => {
+    let res = fs.readdirSync(dirName).map(fileName => {
+      let file = statFile(path.join(dirName, fileName), 'true');
+      return {
+        name: fileName,
+        type: file.isFile() ? 'file' : 'folder'
+      }
+    })
+    resolve(res);
+  })
+}
+module.exports = {
+  writeFile,
+  appendFile,
+  openFile,
+  readFile,
+  statFile,
+  getDir
+}
