@@ -4,8 +4,8 @@
   "description": "node文件操作",
   "main": "app.js",
   "scripts": {
-    "dev": "node src/app",
-    "build": "node src/app --build"
+    "dev": "node build/app",
+    "build": "node build/app --build"
   },
   "dependencies": {
     "chalk": "^4.1.0",

@@ -1,3 +1,4 @@
+const { dir } = require( "console" );
 const fs = require("fs");
 const path = require('path');
 // 文件名的地址相对于启动node的地址
@@ -84,7 +85,7 @@ const statFile = (fileName, sync) => {
 // 获取文件夹内容
 const getDir = (dirName) => {
   let res = fs.readdirSync(dirName).map(fileName => {
-    let file = statFile(path.join(dirName, fileName));
+    let file = statFile(path.join(dirName, fileName), 'sync');
     return {
       name: fileName,
       type: file.isFile() ? 'file' : 'folder'

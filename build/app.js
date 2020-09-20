@@ -9,11 +9,11 @@ const router = require('./router');
 const args = require('minimist')(process.argv.slice(2));
 
 const app = new Koa();
-app.use(cors())
-app.use(json())
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']
 }))
+app.use(json())
+app.use(cors())
 if(!args.build) {
   app.use(logger())
   app.use(async (ctx, next) => {
