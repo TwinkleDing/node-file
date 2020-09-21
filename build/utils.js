@@ -4,16 +4,14 @@ const path = require('path');
 // 文件名的地址相对于启动node的地址
 // 写入文件
 const writeFile = (fileName, data) => {
-  return new Promise((reslove, reject) => {
-    fs.writeFile(fileName, data,  err => {
-      if(err) {
-        console.error(err);
-        reject(err);
-      }else {
-        reslove('数据写入成功！');
-      }
-    });
-  })
+  fs.writeFile(fileName, data,  err => {
+    if(err) {
+      console.error(err);
+      return err;
+    }else {
+      return '数据写入成功！';
+    }
+  });
 }
 
 // 追加文件内容

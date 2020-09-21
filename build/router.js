@@ -18,6 +18,12 @@ router.get('/', (ctx, next) => {
 .post('/api/file/info', (ctx, next) => {
   let content = fs.readFile(ctx.request.body.file, 'sync')
   ctx.body = content;
+})
+.post('/api/file/add', (ctx, next) => {
+  let file = ctx.request.body.file;
+  let data = ctx.request.body.content;
+  let content = fs.writeFile(file, data);
+  ctx.body = content;
 });
 
 module.exports = router;
