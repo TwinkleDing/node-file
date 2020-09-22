@@ -28,6 +28,17 @@ const appendFile = (fileName, data) => {
   })
 }
 
+const reNameFile = (oldName, newName) => {
+  fs.rename(oldName, newName, err => {
+    if(err) {
+      console.error(err);
+      return err;
+    }else {
+      return '重命名成功！';
+    }
+  })
+}
+
 // 打开文件
 /*
   r:读取，r+:读写，rs:同步读取，rs+:同步读写

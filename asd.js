@@ -1,1 +1,1 @@
-123
+export defaule const a = 123;

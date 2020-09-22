@@ -23,7 +23,7 @@ router.get('/', (ctx, next) => {
   let file = ctx.request.body.file;
   let data = ctx.request.body.content;
   let content = fs.writeFile(file, data);
-  ctx.body = content;
+  ctx.body = '文件写入成功';
 });
 
 module.exports = router;
